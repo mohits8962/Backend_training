@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const express = require('express');
 const _ = require('lodash');
 
@@ -32,6 +33,16 @@ router.get('/test-me', function (req, res) {
 
     res.send('My first ever api!')
 });
+
+router.get('/student-details/:age',function(req,res){
+    console.log(JSON.stringify(req.params))
+    let reqParams=req.params
+    let studentsage=reqParams.age
+    console.log(studentsage)
+
+    res.send(studentsage)
+})
+
 
 module.exports = router;
 // adding this comment for no reason

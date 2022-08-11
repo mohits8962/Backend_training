@@ -77,59 +77,93 @@ router.post("/test-post-4", function(req, res) {
 // PROBLEM 01
 
 
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ]
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ]
-       },
+// let players =
+//    [
+//        {
+//            "name": "manish",
+//            "dob": "1/1/1995",
+//            "gender": "male",
+//            "city": "jalandhar",
+//            "sports": [
+//                "swimming"
+//            ]
+//        },
+//        {
+//            "name": "gopal",
+//            "dob": "1/09/1995",
+//            "gender": "male",
+//            "city": "delhi",
+//            "sports": [
+//                "soccer"
+//            ]
+//        },
+//        {
+//            "name": "lokesh",
+//            "dob": "1/1/1990",
+//            "gender": "male",
+//            "city": "mumbai",
+//            "sports": [
+//                "soccer"
+//            ]
+//        },
    
-    ]
+//     ]
 
 
-    router.post('/players', function (req, res) {
-        let element= req.body
-        for (let i = 0; i < players.length; i++) {
-            let anotherElement=players[i]
-            if (anotherElement.name==element.name) {
-                return res.send("name is already exist. Try another one")
-            }
-        }
-        players.push(element)
-        res.send({ data: players , status: true })
-    });
+    // router.post('/players', function (req, res) {
+    //     let element= req.body
+    //     for (let i = 0; i < players.length; i++) {
+    //         let anotherElement=players[i]
+    //         if (anotherElement.name==element.name) {
+    //             return res.send("name is already exist. Try another one")
+    //         }
+    //     }
+    //     players.push(element)
+    //     res.send({ data: players , status: true })
+    // });
 
 
 
 // PROBLEM 02
+let persons=[{
+    name: "PK",
+    age:10,
+    votingStatus:false
+},
+{
+    name: "SK",
+    age:20,
+    votingStatus:false
+},
+{
+    name: "AA",
+    age:70,
+    votingStatus:false
+},
+{
+    name: "SC",
+    age:5,
+    votingStatus:false
+},
+{
+    name: "HO",
+    age:40,
+    votingStatus:false
+}
+]
+router.post('/person-query', function (req, res) {
+    let votingAge= req.query.votingAge
+    let finalResult=[]
 
-router.post('/players', function (req, res) {
-    let element= req.body
-    
-    res.send({ data: players , status: true })
+    for (let i = 0; i < persons.length; i++) {
+        let personAge=persons[i]
+        if(personAge.age>votingAge){
+            personAge.votingStatus="true"
+            finalResult.push(personAge)
+            // console.log(personAge)
+        }
+    }
+    res.send({ data: finalResult , status: true })
 });
 
 

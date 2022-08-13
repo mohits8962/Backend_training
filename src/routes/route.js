@@ -11,3 +11,10 @@ router.get("/test-me", function (req, res) {
 // router.get("/getUsersData", UserController.getUsersData)
 
 
+// Assignment --------------------------------------------------------------------------------------------
+
+router.post("/newBook", UserController.newBook)
+
+router.get("/getListOfBooks", UserController.getListOfBooks)
+
+module.exports = router;

@@ -1,17 +1,36 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId
+// // const mongoose = require('mongoose');
+// // const ObjectId = mongoose.Schema.Types.ObjectId
 
-const bookSchema = new mongoose.Schema( {
-    name: String,
-    author_id: {
-        type: ObjectId,
-        ref: "Author"
-    }, 
-    price: Number,
-    ratings: Number
-
-
-}, { timestamps: true });
+// // const bookSchema = new mongoose.Schema( {
+// //     name: String,
+// //     author_id: {
+// //         type: ObjectId,
+// //         ref: "Author"
+// //     }, 
+// //     price: Number,
+// //     ratings: Number
 
 
-module.exports = mongoose.model('LibraryBook', bookSchema)
+// // }, { timestamps: true });
+
+
+// // module.exports = mongoose.model('LibraryBook', bookSchema)
+
+
+// const mongoose = require('mongoose');
+// const ObjectId = mongoose.Schema.Types.ObjectId
+
+// const bookSchema = new mongoose.Schema( {
+//     name: String,
+//     author_id: {
+//                 type: ObjectId,
+//                 ref: "Author"
+//             }, 
+//     price: Number,
+//     ratings: Number
+
+
+// }, { timestamps: true });
+
+
+// module.exports = mongoose.model('LibraryBook', bookSchema)

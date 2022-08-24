@@ -72,8 +72,32 @@ const totalSalesPerAuthor = async function (req, res) {
 
 
 
-module.exports.createBook = createBook
-module.exports.getBooksData = getBooksData
-module.exports.updateBooks = updateBooks
-module.exports.deleteBooks = deleteBooks
-module.exports.totalSalesPerAuthor = totalSalesPerAuthor
+// module.exports.createBook = createBook
+// module.exports.getBooksData = getBooksData
+// module.exports.updateBooks = updateBooks
+// module.exports.deleteBooks = deleteBooks
+// module.exports.totalSalesPerAuthor = totalSalesPerAuthor
+
+
+
+
+
+
+const gettingData01= async function (req, res) {
+
+    res.send({msg: "this is the result"})
+}
+
+const gettingData02= async function (req, res) {
+
+    res.send({msg: "this is the result"})
+}
+
+const gettingData03= async function (req, res) {
+
+    res.send({msg: "this is the result"})
+}
+
+module.exports.gettingData01 = gettingData01
+module.exports.gettingData02 = gettingData02
+module.exports.gettingData03 = gettingData03

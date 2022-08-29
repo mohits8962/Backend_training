@@ -7,9 +7,11 @@ const createUser = async function (abcd, xyz) {
   //the second parameter is always the response
   let data = abcd.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
+  // console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
 };
+
+// -----------------------------------------------------------------------------------------------------------------
 
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
@@ -40,6 +42,8 @@ const loginUser = async function (req, res) {
   res.send({ status: true, data: token });
 };
 
+// -----------------------------------------------------------------------------------------------------------------
+
 const getUserData = async function (req, res) {
 
   let userId = req.params.userId;
@@ -49,6 +53,8 @@ const getUserData = async function (req, res) {
 
   res.send({ status: true, data: userDetails });
 };
+
+// -----------------------------------------------------------------------------------------------------------------
 
 const updateUser = async function (req, res) {
   let userId = req.params.userId;
@@ -62,6 +68,8 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, {new: true});
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+// -----------------------------------------------------------------------------------------------------------------
 
 const deleteUser = async function(req, res) {    
   let userId = req.params.userId

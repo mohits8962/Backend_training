@@ -18,7 +18,18 @@ const validateToken = function(req, res, next) {
     if (!decodedToken) {
       return res.send({ status: false, msg: "token is invalid" });
     }
+    req.loggedInUser = decodedToken.userId
     next()
 }
 
+
+const checkIfAuthorized = function(req,res,next){
+  let requestUserId = req.params.userId
+  if(requestUserId !== req.loggedInUser){
+    return res.send({status: false, msg:"permission denied"})
+  }
+  next()
+}
+
 module.exports.validateToken = validateToken
+module.exports.checkIfAuthorized = checkIfAuthorized

@@ -27,7 +27,7 @@ const loginUser = async function (req, res) {
     if (Object.keys(userName).length != 0 && Object.keys(password).length != 0) {
       let user = await userModel.findOne({ emailId: userName, password: password });
       if (!user)
-        return res.send({ status: false, msg: "username or the password is not correct" });
+        return res.status(401).send({ status: false, msg: "username or the password is not correct" });
 
       let token = jwt.sign(
         {
@@ -56,7 +56,7 @@ const getUserData = async function (req, res) {
     if (userId != 0) {
       let userDetails = await userModel.findById(userId);
       if (!userDetails)
-        return res.send({ status: false, msg: "No such user exists" });
+        return res.status(404).send({ status: false, msg: "No such user exists" });
 
       res.status(200).send({ status: true, data: userDetails });
     }
@@ -77,12 +77,12 @@ const updateUser = async function (req, res) {
       let user = await userModel.findById(userId);
       //Return an error if no user with the given id exists in the db
       if (!user) {
-        return res.send("No such user exists");
+        return res.status(404).send("No such user exists");
       }
 
       let userData = req.body;
       let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
-      res.status(200).send({ status: updatedUser, data: updatedUser });
+      res.status(201).send({ status: updatedUser, data: updatedUser });
     }
     else res.status(400).send({ msg: "bad request" })
   }
@@ -100,10 +100,10 @@ const deleteUser = async function (req, res) {
     if (userId != 0) {
       let user = await userModel.findById(userId)
       if (!user) {
-        return res.send({ status: false, message: "no such user exists" })
+        return res.status(404).send({ status: false, message: "no such user exists" })
       }
       let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, { isDeleted: true }, { new: true })
-      res.status(200).send({ status: true, data: updatedUser })
+      res.status(201).send({ status: true, data: updatedUser })
     }
     else res.status(400).send({ msg: "bad request" })
   }

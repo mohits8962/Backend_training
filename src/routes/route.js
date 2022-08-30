@@ -11,6 +11,7 @@ router.post("/users", userController.createUser  )
 
 router.post("/login", userController.loginUser)
 
+
 //The userId is sent by front end
 router.get("/users/:userId", auth.validateToken, auth.checkIfAuthorized, userController.getUserData)
 

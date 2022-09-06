@@ -9,6 +9,12 @@ router.post('/blogs', blogsController.createBlogs)
 
 router.get('/getblogs', blogsController.getBlogs)
 
+router.put('/blogs/:blogId', blogsController.updateBlogs)
+
+router.delete('/deletedBlog/:blogId', blogsController.deletedBlog)
+
+router.delete('/deletedByQuery', blogsController.deletedByQuery)
+
 
 
 

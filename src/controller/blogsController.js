@@ -1,9 +1,16 @@
+const { isValidObjectId } = require('mongoose');
 const authormodel = require('../model/authormodel');
 const blogsModel = require('../model/blogsmodel');
 
 const createBlogs = async function (req, res) {
     try {
         let blogs = req.body
+
+        //authorization
+        if (!isValidObjectId(blogs.authorId)) {
+            return res.status(400).send({ msg: "Not A Valid Author Id" })
+        }
+
         let condition = await authormodel.findById(blogs.authorId)
         if (condition) {
             if (blogs.isPublished == true) {
@@ -11,7 +18,7 @@ const createBlogs = async function (req, res) {
                 let savedData = await blogsModel.create(blogs)
                 res.status(201).send({ data: savedData })
             }
-            else if (blogs.isPublished == false) {
+            else {
                 let savedData = await blogsModel.create(blogs)
                 res.status(201).send({ data: savedData })
             }
@@ -52,7 +59,7 @@ const updateBlogs = async function (req, res) {
                 .findByIdAndUpdate(getId, {
                     $push: { tags: data.tags, subcategory: data.subcategory },
                     title: data.title, category: data.category
-                })
+                }, { new: true })
             res.status(200).send({ status: true, data: checkData })
         } else {
             res.status(404).send("file may be not present or Deleted")
@@ -65,7 +72,7 @@ const updateBlogs = async function (req, res) {
 
 const deletedBlog = async function (req, res) {
     let getId = req.params.blogId
-    if (!getId) {return res.status(404).send("Please add Blog Id")}
+    if (!getId) { return res.status(404).send("Please add Blog Id") }
 
     let blogId = await blogsModel.findById(getId)
     if (!blogId) return res.status(404).send("Please Enter Valid Blog Id")
@@ -82,12 +89,12 @@ const deletedBlog = async function (req, res) {
 const deletedByQuery = async function (req, res) {
     let data = req.query
     let getData = await blogsModel.findOne(data)
-    if(!getData) return res.status(404).send({status:false, msg:"Blog is not created"})
+    if (!getData) return res.status(404).send({ status: false, msg: "Blog is not created" })
 
-    if(getData.isDeleted==true) return res.status(400).send({status:false, msg:"Document Is Already Deleted"})
+    if (getData.isDeleted == true) return res.status(400).send({ status: false, msg: "Document Is Already Deleted" })
 
-    let savedData= await blogsModel.findOneAndUpdate(data, {$set:{isDeleted:true, deletedAt: Date.now()}}, {new:true})
-    res.status(200).send({status:true, msg:savedData})
+    let savedData = await blogsModel.findOneAndUpdate(data, { $set: { isDeleted: true, deletedAt: Date.now() } }, { new: true })
+    res.status(200).send({ status: true, msg: savedData })
 }
 
 module.exports.createBlogs = createBlogs

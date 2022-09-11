@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
-
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 const blogSchema = new mongoose.Schema({
@@ -44,7 +42,7 @@ const blogSchema = new mongoose.Schema({
     publishedAt: {
         type: Date
     },
-   
+
 }, { timestamps: true })
 
 module.exports = mongoose.model('blog', blogSchema)

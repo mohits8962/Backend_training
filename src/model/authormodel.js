@@ -1,17 +1,17 @@
 
 const mongoose = require('mongoose');
-const validator=require("validator")
+const validator = require("validator")
 
 const authorSchema = new mongoose.Schema({
     fname: {
         type: String,
         required: true,
-        trim:true
+        trim: true
     },
     lname: {
         type: String,
         required: true,
-        trim:true
+        trim: true
     },
     title: {
         type: String,
@@ -23,8 +23,8 @@ const authorSchema = new mongoose.Schema({
         unique: true,
         lowerCase: true,
         required: true,
-        validate(value){
-            if(!validator.isEmail(value)) {
+        validate(value) {
+            if (!validator.isEmail(value)) {
                 throw new Error("Email is invalid");
             }
         }
@@ -32,7 +32,7 @@ const authorSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength:[8, "Password should be atlest 8 digits"]
+        minlength: [8, "Password should be atlest 8 digits"]
 
     }
 }, { timestamps: true })

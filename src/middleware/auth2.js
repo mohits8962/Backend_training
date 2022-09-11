@@ -9,11 +9,11 @@ const authorization = async (req, res, next) => {
       res.status(400).send({ status: false, msg: "invalid user" });
     }
     let blogId = req.params.blogId;
-    let findBlog= await blogsModel.findOne({_id:blogId})
+    let findBlog = await blogsModel.findOne({ _id: blogId })
     if (!findBlog) {
-        return res.status(400).send({ status: false, msg: "blog data not find" });
-      }
-      let authorId = findBlog.authorId.toString()
+      return res.status(400).send({ status: false, msg: "blog data not find" });
+    }
+    let authorId = findBlog.authorId.toString()
     let validAuthorLoggedIn = decodedToken.userId;
     if (authorId !== validAuthorLoggedIn) {
       return res.status(400).send({ status: false, msg: "not a valid user" });
